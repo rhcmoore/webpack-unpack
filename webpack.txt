@@ -1,0 +1,38 @@
+What is Webpack?
+    * Holds our whole build workflow
+    * A bundler (concatenating files) that can also ...
+    * Optimize files
+    * Hook in plugins and loaders
+    * Transform files
+    * Transpile next-gen JS to current gen JS
+
+Core Ideas
+    * Multiple files bundled together
+    * Analyze connections (eg. imports) between files
+    * Run additional logic to transform code
+    * De-facto standard for setting up projects
+
+How Webpack Works - In 4 Features
+    1. Needs at least 1 entry point (eg. App.js)
+        * For instance, the root JS file that mounts React app to the DOM
+        * Needs file to analyze dependencies 
+        * Build up a dependency graph and understand which files make up application
+
+    2. Loaders (eg. babel-loader, css-loader)
+        * Applied transformations on a per-file level / file-type dependent
+        * eg. all JS files handled by this loader
+
+    3. Plugins (eg. uglify)
+        * Takes bundled/concat file (but still before output)
+        * Apply general/global transformations
+
+    4. Output (eg. dist/bundle.js)
+        * Bundled dependencies output
+        * In the correct order & concatenated
+
+Basic Workflow Requirements (eg. create-react-app)
+    * Compile next-gen JS Features
+    * Handle JSX
+    * CSS auto-prefixing
+    * Support image imports
+    * Optimize code (pre-bundle)
