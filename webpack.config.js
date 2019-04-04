@@ -7,6 +7,7 @@ module.exports = {
     output: {  // create new folder with file
         path: path.resolve(__dirname, "dist"), // where file should be stored
         filename: "bundle.js", // name of bundled JS file
+        chunkFilename: "[id].js", // dynamically generated for lazy loading
         publicPath: "" // where files are put (root vs. nested folder)
     },
     resolve: { // provide extensions to files when not provided
@@ -14,13 +15,15 @@ module.exports = {
     },
     module: { // loaders to handle file/module types
         rules: [
+            // JS files
             {
                 test: /\.js$/, // if we're in a .js file...
                 loader: "babel-loader", // ...apply this loader (configured in .babelrc)
                 exclude: /node_modules/ // don't transform these, they're already optimized
             },
+            // CSS files
             {
-                test: /\.css$/, // CSS files
+                test: /\.css$/, 
                 exclude: /node_modules/,
                 use: [ // use 'use' to apply multiple loaders
                     { 
@@ -38,17 +41,27 @@ module.exports = {
                         loader: "postcss-loader", // runs before css-loader (bottom to top)
                         options: {
                             ident: "postcss",
-                            plugins: () => {
+                            plugins: () => [
                                 autoprefixer({
                                     browsers: [
-                                        ">1%",
+                                        "> 1%",
                                         "last 2 versions"
                                     ]
                                 })
-                            }
+                            ]
                         }
                     }
                 ]
+            },
+            // Images
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                loader: "url-loader?limit=8000&name=images/[name].[ext]" 
+                // takes images - if below threshold they are converted to data64 urls to inline into documents (not downloading files)
+                // files above limit are copied to poutput folder, generate link to file and puts that into import for components
+                // params are another loader (file-loader) - copies file and gives us a link to it 
+                    // limit threshold at 8000 bytes
+                    // image copied with original name/ext into images folder of dist 
             }
         ]
     },
