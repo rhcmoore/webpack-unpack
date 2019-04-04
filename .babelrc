@@ -1,0 +1,15 @@
+// configuring babel (babel-loader, babel-core)
+// installed presets: babel-preset-env, babel-preset-react
+{
+    "presets": [
+        ["env", { // name of preset
+            "targets": { 
+                "browsers" : [ // compile JS to browsers that meet this criteria
+                    ">1%",
+                    "last 2 versions"
+                ]
+            }
+        }],
+        "react"
+    ]
+}
