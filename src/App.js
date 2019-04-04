@@ -12,12 +12,12 @@ class App extends Component {
         return (
             <div>
                 <div>
-                    <Link to="/">Users</Link> |
+                    <Link to="/">Users</Link>  | 
                     <Link to="/facebook">Facebook</Link>
                 </div>
                 <div>
-                    <Route to="/" exact component={Users} />
-                    <Route to="/facebook" component={AsyncFacebook} />
+                    <Route path="/" exact component={Users} />
+                    <Route path="/facebook" component={AsyncFacebook} />
                 </div>
             </div>
         );

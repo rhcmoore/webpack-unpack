@@ -1,5 +1,6 @@
 const path = require("path");
 const autoprefixer = require("autoprefixer");
+const htmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     devtool: "cheap-module-eval-source-map", // get source maps - for debugging in browser
@@ -65,4 +66,11 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new htmlWebpackPlugin({ // connects webpack to html file
+            template: __dirname + "/src/index.html",
+            filename: "index.html",
+            inject: "body"
+        })
+    ]
 };
